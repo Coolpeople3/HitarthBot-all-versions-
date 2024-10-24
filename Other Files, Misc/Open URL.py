@@ -1,8 +1,13 @@
 import webbrowser
+import keyboard
 a=input("what URL should I open?  ")
-while 1<2:
-  # Specify the URL you want to open
+b=1
+c=2
+while b<c:
   url = a
-  # Open a new tab in the default web browser
   webbrowser.open_new_tab(url)
+  try:
+    if keyboard.is_pressed('h'):
+      b=100
+  except:pass
 print("Thanks")
