@@ -22,3 +22,4 @@ predictions = model.predict(X_test)
 # Output the results
 print("Predicted values:", predictions)
 print("Actual values:", y_test)
+DontCloseScreen=input("Press enter to close")
