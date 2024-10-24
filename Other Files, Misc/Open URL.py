@@ -1,5 +1,5 @@
 import webbrowser
-a=input("what URL should I open?")
+a=input("what URL should I open?  ")
 while 1<2:
   # Specify the URL you want to open
   url = a
