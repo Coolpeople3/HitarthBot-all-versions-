@@ -43,7 +43,7 @@ def send_message():
 
 # Create the main GUI window
 root = tk.Tk()
-root.title("Chatbot GUI")
+root.title("HitarthBot7")
 root.geometry("500x600")
 root.resizable(False, False)
 
