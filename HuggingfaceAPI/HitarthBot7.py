@@ -2,34 +2,39 @@ import tkinter as tk
 from tkinter import scrolledtext
 from huggingface_hub import InferenceClient
 
-# Replace with your Hugging Face API key
+# Replace with your Hugging Face API Key
 API_KEY = "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"
 
-# Initialize the Hugging Face client
+# Initialize Hugging Face Inference Client
 client = InferenceClient(api_key=API_KEY)
 
-# Function to handle user input and get bot response
+# Function to handle sending messages
 def send_message():
-    user_message = user_input.get()
-    if not user_message.strip():
+    user_message = user_input.get().strip()
+    if not user_message:
         return  # Ignore empty messages
 
     # Display the user's message
     chat_window.config(state=tk.NORMAL)
     chat_window.insert(tk.END, f"You: {user_message}\n")
     chat_window.config(state=tk.DISABLED)
+    user_input.delete(0, tk.END)  # Clear input box
 
-    user_input.delete(0, tk.END)  # Clear the input box
+    # Prepare the prompt for the bot
+    prompt = (
+        "You are HitarthBot, a helpful and friendly chatbot.\n"
+        f"You: {user_message}\nBot:"
+    )
 
-    # Get the bot's response
     try:
-        messages = [{"role": "user", "content": user_message}]
-        completion = client.chat.completions.create(
-            model="microsoft/DialoGPT-medium",
-            messages=messages,
-            max_tokens=500,
+        # Call the Hugging Face API
+        response = client.text_generation(
+            model="openassistant/oasst-sft-4-pythia-12b-epoch-3.5",  # Public model
+            prompt=prompt,
+            max_new_tokens=150,
+            temperature=0.8,
         )
-        bot_response = completion.choices[0].message
+        bot_response = response.strip()  # Clean the response text
 
         # Display the bot's response
         chat_window.config(state=tk.NORMAL)
@@ -37,25 +42,26 @@ def send_message():
         chat_window.config(state=tk.DISABLED)
         chat_window.yview(tk.END)  # Auto-scroll to the bottom
     except Exception as e:
+        # Display error messages
         chat_window.config(state=tk.NORMAL)
         chat_window.insert(tk.END, f"Error: {str(e)}\n")
         chat_window.config(state=tk.DISABLED)
 
 # Create the main GUI window
 root = tk.Tk()
-root.title("HitarthBot7")
+root.title("HitarthBot")
 root.geometry("500x600")
 root.resizable(False, False)
 
-# Create a chat display area
+# Create the chat window
 chat_window = scrolledtext.ScrolledText(root, wrap=tk.WORD, state=tk.DISABLED)
 chat_window.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)
 
-# Create an input field
+# Create the user input field
 user_input = tk.Entry(root, font=("Arial", 14))
 user_input.pack(pady=5, padx=10, fill=tk.X)
 
-# Create a send button
+# Create the send button
 send_button = tk.Button(root, text="Send", font=("Arial", 12), command=send_message)
 send_button.pack(pady=5)
 
