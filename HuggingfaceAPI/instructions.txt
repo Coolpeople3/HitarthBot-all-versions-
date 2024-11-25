@@ -1,3 +1,4 @@
 install:
 pip install transformers touch
-then run the py file in the same dir as this
+pip install huggingface_hub
+run python file HitarthBot7.py
