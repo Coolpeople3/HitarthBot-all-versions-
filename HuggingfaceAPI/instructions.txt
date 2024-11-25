@@ -1,0 +1,3 @@
+install:
+pip install transformers touch
+then run the py file in the same dir as this
