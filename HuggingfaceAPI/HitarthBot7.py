@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import scrolledtext
 from huggingface_hub import InferenceClient
+'''          #use this part when finalising to hide api key
 from dotenv import load_dotenv
 import os
 
@@ -9,8 +10,11 @@ load_dotenv()
 
 # Access the API key
 api_key = os.getenv("API_KEY")
-# Replace with your Hugging Face API Key
+
 API_KEY = api_key
+'''
+
+API_KEY = "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"  #get rid of this line before finalising
 
 # Initialize Hugging Face Inference Client
 client = InferenceClient(api_key=API_KEY)
