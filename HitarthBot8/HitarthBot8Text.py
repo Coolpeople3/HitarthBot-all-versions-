@@ -25,7 +25,7 @@ def main():
                 result = response.json()
                 if result and isinstance(result, list):
                     bot_response = result[0].get("generated_text", "No response.")
-                    print("HitarthBot:", bot_response)
+                    print("HitarthBot:", bot_response, "\n")
                 else:
                     print("HitarthBot: No valid response received.")
             except Exception as e:
